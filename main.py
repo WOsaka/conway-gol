@@ -35,6 +35,7 @@ done = False
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
+grid = Grid(screen, 10, 10, 1)
 
 # -------- Main Program Loop -----------
 while not done:
@@ -45,12 +46,9 @@ while not done:
         
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
-                print("Left mouse button clicked at", event.pos)
-                print("row, column:", grid.compute_clicked_field(event.pos))
+                grid.change_fields_living_status(event)
 
     # --- Game logic should go here
-    grid = Grid(screen, 10, 10, 1)
-    # grid = Grid(screen, 20, 20, 5)
 
     # --- Screen-clearing code goes here
 
