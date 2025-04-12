@@ -37,6 +37,12 @@ class Grid:
                 )
             self.fields.append(row)
 
+    def set_field_alive(self, row, column):
+        self.fields[row][column].set_alive()
+
+    def set_field_dead(self, row, column):
+        self.fields[row][column].set_dead()
+
     def calculate_rows(self):
         rows = (self.heigth - self.padding) // (self.field_heigth + self.padding)
         return rows

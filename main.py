@@ -42,8 +42,13 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+        
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                print("Left mouse button clicked at", event.pos)
 
     # --- Game logic should go here
+    grid = Grid(screen, 10, 10, 1)
 
     # --- Screen-clearing code goes here
 
@@ -55,7 +60,6 @@ while not done:
     screen.fill(BLACK)
 
     # --- Drawing code should go here
-    grid = Grid(screen, 10, 10, 1)
     grid.draw()
 
     # --- Go ahead and update the screen with what we've drawn.
