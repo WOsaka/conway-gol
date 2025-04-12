@@ -46,9 +46,11 @@ while not done:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 print("Left mouse button clicked at", event.pos)
+                print("row, column:", grid.compute_clicked_field(event.pos))
 
     # --- Game logic should go here
     grid = Grid(screen, 10, 10, 1)
+    # grid = Grid(screen, 20, 20, 5)
 
     # --- Screen-clearing code goes here
 

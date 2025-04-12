@@ -37,6 +37,12 @@ class Grid:
                 )
             self.fields.append(row)
 
+    def compute_clicked_field(self, event):
+        x, y = event
+        column = (x - self.padding) // (self.field_width + self.padding)
+        row = (y - self.padding) // (self.field_heigth + self.padding)
+        return row, column
+
     def set_field_alive(self, row, column):
         self.fields[row][column].set_alive()
 
