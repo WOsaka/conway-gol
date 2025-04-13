@@ -17,6 +17,7 @@ class Grid:
         self.fields = []
 
         self.create_fields()
+        self.set_border_dead()
 
     def compute_next_generation(self):
         fields_statuses = []

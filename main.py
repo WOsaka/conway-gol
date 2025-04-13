@@ -1,17 +1,7 @@
-"""
-Pygame base template for opening a window
-
-Sample Python/Pygame Programs
-Simpson College Computer Science
-http://programarcadegames.com/
-http://simpson.edu/computer-science/
-
-Explanation video: http://youtu.be/vRB_983kUMc
-"""
-
 import pygame
 from rectangle import Rectangle
 from grid import Grid
+from pattern import Pattern
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -39,7 +29,7 @@ clock = pygame.time.Clock()
 game_running = False
 
 grid = Grid(screen, 10, 10, 1)
-grid.set_border_dead()
+pattern = Pattern(grid)  
 
 # -------- Main Program Loop -----------
 while not done:
@@ -51,12 +41,18 @@ while not done:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 grid.change_fields_living_status(event)
+            if event.button == 3:
+                pattern.set_pattern_in_grid(event)
 
-        if event.type == pygame.KEYDOWN:  
-            if event.key == pygame.K_SPACE:  
-                game_running = not game_running 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                game_running = not game_running
             if event.key == pygame.K_q:
                 done = True
+            if event.key == pygame.K_RIGHT:
+                pattern.set_next_pattern()
+            if event.key == pygame.K_LEFT:
+                pattern.set_prev_pattern()
 
     # --- Game logic should go here
     if game_running:
@@ -73,6 +69,9 @@ while not done:
 
     # --- Drawing code should go here
     grid.draw()
+
+    x, y = pygame.mouse.get_pos()
+    pattern.draw(x, y)
 
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
