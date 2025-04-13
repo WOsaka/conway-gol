@@ -12,10 +12,7 @@ class Pattern:
         self._patterns = []
         self._pattern_index = 0
 
-        self.add_pixel()
-        self.add_glider()
-        self.add_blinker()
-        self.add_penta_dec()
+        self.call_add_patter_funcs()
 
     def set_pattern_in_grid(self, mouseclick_event):
         row, column = self._grid.compute_clicked_field(mouseclick_event.pos)
@@ -56,9 +53,22 @@ class Pattern:
         else:
             self._pattern_index -= 1
 
-    def set_pattern_position(self, x, y):
-        self._x = x
-        self._y = y
+    def call_add_patter_funcs(self):
+        self.add_big_ship()
+        self.add_u()
+        self.add_glider()
+        self.add_blinker()
+        self.add_penta_dec()
+    
+
+    def add_big_ship(self):
+        pattern = [
+            [0, 1, 1, 0, 0, 0, 0],
+            [1, 1, 0, 1, 1, 1, 1],
+            [0, 1, 1, 1, 1, 1, 1],
+            [0, 0, 1, 1, 1, 1, 0],
+        ]
+        self._patterns.append(pattern)
 
     def add_glider(self):
         pattern = [
@@ -68,8 +78,16 @@ class Pattern:
         ]
         self._patterns.append(pattern)
 
-    def add_pixel(self):
-        pattern = [[1]]
+    def add_u(self):
+        pattern = [
+            [1, 1, 1],
+            [1, 0, 1],
+            [1, 0, 1],
+            [0, 0, 0],
+            [1, 0, 1],
+            [1, 0, 1],
+            [1, 1, 1],
+        ]
         self._patterns.append(pattern)
 
     def add_blinker(self):
