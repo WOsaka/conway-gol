@@ -28,14 +28,18 @@ pygame.init()
 size = (804, 804)
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("Conways Game of Life")
 
 # Loop until the user clicks the close button.
 done = False
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
+
+game_running = False
+
 grid = Grid(screen, 10, 10, 1)
+grid.set_border_dead()
 
 # -------- Main Program Loop -----------
 while not done:
@@ -43,12 +47,20 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 grid.change_fields_living_status(event)
 
+        if event.type == pygame.KEYDOWN:  
+            if event.key == pygame.K_SPACE:  
+                game_running = not game_running 
+            if event.key == pygame.K_q:
+                done = True
+
     # --- Game logic should go here
+    if game_running:
+        grid.compute_next_generation()
 
     # --- Screen-clearing code goes here
 
